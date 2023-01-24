@@ -1,0 +1,8 @@
+#ignoring main.exe file
+main.exe
+
+#ignoring .vscode folder
+.vscode
+
+#ignoring build folder
+build
