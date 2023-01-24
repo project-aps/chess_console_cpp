@@ -1,0 +1,24 @@
+board(0,0) starts as a white piece.
+
+level 1,2 for white piece
+level last ,2ndLast for black piece
+
+
+coding order
+1.  piece.h
+2.  inherit all pieces form piece.h
+    i)  king.h
+    ii) knight.h
+    iii)rook.h
+    iv) bishop.h
+    v)  queen.h
+    vi) pawn.h
+3.  color.h     //enum
+4.  cell.h
+5.  board.h
+6.  game_status.h   //enum
+7.  player.h
+8.  game.h
+9.  main.cpp
+
+
