@@ -47,6 +47,10 @@ class Game
     bool is_black_left_rook_moved;
     bool is_black_right_rook_moved;
 
+    //to store the no.of moves of white and black
+    int white_moves;
+    int black_moves;
+
 public:
     // Castling class is friend class of Game Class i.e. Castling Class can acces the methods and data members of Game class from Castling Class;
     // friend class Castling;
@@ -73,6 +77,9 @@ public:
         this->is_black_king_moved = false;
         this->is_black_left_rook_moved = false;
         this->is_black_right_rook_moved = false;
+
+        this->white_moves=0;
+        this->black_moves=0;
     }
 
     Game(Board &c)
@@ -95,6 +102,9 @@ public:
         this->is_black_king_moved = false;
         this->is_black_left_rook_moved = false;
         this->is_black_right_rook_moved = false;
+
+        this->white_moves=0;
+        this->black_moves=0;
     }
 
     Game(Color tn)
@@ -116,6 +126,9 @@ public:
         this->is_black_king_moved = false;
         this->is_black_left_rook_moved = false;
         this->is_black_right_rook_moved = false;
+
+        this->white_moves=0;
+        this->black_moves=0;
     }
 
     /////////////////////////////////////////////////////////////////////////////////////
@@ -127,7 +140,7 @@ public:
         system("cls"); // each time it types this string cls to terminal and thus it prints board every time
         
         //this->print_game_staus(game_staus);
-        
+        this->print_moves();
         white.print_dead_board();
         b.print_board();
         black.print_dead_board();
@@ -503,6 +516,7 @@ public:
     {
 
         Piece_type src_piece = src->get_piece();
+        Color piece_color=src->get_color();
 
         King k1;
         Knight n1;
@@ -520,15 +534,18 @@ public:
             // King k1;
             if (k1.valid_move(start_x, start_y, end_x, end_y, b))
             {
-                Color piece_color=src->get_color();
+                //Color piece_color=src->get_color();
                 move(src, dest);
 
                 //changing the value of king_moved of respective color
                 if(piece_color==WHITE){
                     this->is_white_king_moved=true;
+                    //whites_moves increased
+                    this->white_moves++;
                 }
                 else if(piece_color==BLACK){
                     this->is_black_king_moved=true;
+                    this->black_moves++;
                 }
             }
             else
@@ -544,7 +561,17 @@ public:
 
             if (n1.valid_move(start_x, start_y, end_x, end_y, b))
             {
+                //Color piece_color=src->get_color();
                 move(src, dest);
+
+                if(piece_color==WHITE){
+                    //whites_moves increased
+                    this->white_moves++;
+                }
+                else if(piece_color==BLACK){
+                    //black_moves increased
+                    this->black_moves++;
+                }
             }
             else
             {
@@ -570,11 +597,15 @@ public:
                   //white left rook
                   if((start_y == starting_cell_y) && (start_x == starting_cell_x) ){
                     this->is_white_left_rook_moved=true;
+
+                    this->white_moves++;
                   }
 
                   //white right rook 
                   if((start_y == starting_cell_y)  && (start_x == ending_cell_x) ){
                     this->is_white_right_rook_moved=true;
+
+                    this->white_moves++;
                   } 
                 }
                 //for black rook
@@ -583,11 +614,15 @@ public:
                   //black left rook
                   if((start_y == ending_cell_y)  && (start_x == starting_cell_x) ){
                     this->is_black_left_rook_moved=true;
+
+                    this->black_moves++;
                   }
 
                   //black right rook 
                   if((start_y == ending_cell_y)  && (start_x == ending_cell_x) ){
                     this->is_black_right_rook_moved=true;
+
+                    this->black_moves++;
                   }
                 }
             }
@@ -604,6 +639,15 @@ public:
             if (b1.valid_move(start_x, start_y, end_x, end_y, b))
             {
                 move(src, dest);
+
+                if(piece_color==WHITE){
+                    //whites_moves increased
+                    this->white_moves++;
+                }
+                else if(piece_color==BLACK){
+                    //black_moves increased
+                    this->black_moves++;
+                }
             }
             else
             {
@@ -618,6 +662,15 @@ public:
             if (q1.valid_move(start_x, start_y, end_x, end_y, b))
             {
                 move(src, dest);
+
+                if(piece_color==WHITE){
+                    //whites_moves increased
+                    this->white_moves++;
+                }
+                else if(piece_color==BLACK){
+                    //black_moves increased
+                    this->black_moves++;
+                }
             }
             else
             {
@@ -632,6 +685,15 @@ public:
             if (p1.valid_move(start_x, start_y, end_x, end_y, b))
             {
                 move(src, dest);
+
+                if(piece_color==WHITE){
+                    //whites_moves increased
+                    this->white_moves++;
+                }
+                else if(piece_color==BLACK){
+                    //black_moves increased
+                    this->black_moves++;
+                }
             }
             else
             {
@@ -1309,7 +1371,8 @@ public:
                     Cell *rook_dest = board.get_cell_pointer(start_x - 1, start_y);
 
                     move(rook_src, rook_dest);
-
+                    
+                    this->white_moves++;
                     // after castling (moving the king and rook to specified location) is done return true
                     return true;
                 }
@@ -1347,6 +1410,7 @@ public:
                     Cell *rook_dest = board.get_cell_pointer(start_x + 1, start_y);
                     this->move(rook_src, rook_dest);
 
+                    this->white_moves++;
                     // after castling (moving the king and rook to specified location) is done return true
                     return true;
                 }
@@ -1396,6 +1460,7 @@ public:
 
                     move(rook_src, rook_dest);
 
+                    this->black_moves++;
                     // after castling (moving the king and rook to specified location) is done return true
                     return true;
                 }
@@ -1433,6 +1498,7 @@ public:
                     Cell *rook_dest = board.get_cell_pointer(start_x + 1, start_y);
                     this->move(rook_src, rook_dest);
 
+                    this->black_moves++;
                     // after castling (moving the king and rook to specified location) is done return true
                     return true;
                 }
@@ -1512,6 +1578,17 @@ public:
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////
+    //print moves in upper portion of the board
+
+    void print_moves(){
+        system("cls");
+        cout<<"-------------------\n";
+        cout<<"WHITE moves: "<<this->white_moves<<endl;
+        cout<<"BLACK moves: "<<this->black_moves<<endl;
+        cout<<"-------------------\n";
+    }
+    
+    //////////////////////////////////////////////////////
     // getter of board
     Board get_board()
     {
