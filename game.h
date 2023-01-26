@@ -638,6 +638,9 @@ public:
             if (p1.valid_move(start_x, start_y, end_x, end_y, b))
             {
                 move(src, dest);
+                if(p1.get_this_pawn_moved_double()){
+                    src->set_pawn_double_step_movement(true);
+                }
             }
             else
             {
