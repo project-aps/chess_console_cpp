@@ -599,6 +599,17 @@ public:
             {
                 Color piece_color = src->get_color();
                 move(src, dest);
+                
+                if (piece_color == WHITE)
+                {
+                    // whites_moves increased
+                    this->white_moves++;
+                }
+                else if (piece_color == BLACK)
+                {
+                    // black_moves increased
+                    this->black_moves++;
+                }
 
                 // changing the value of king_moved of respective color
 
@@ -611,7 +622,7 @@ public:
                     {
                         this->is_white_left_rook_moved = true;
 
-                        this->white_moves++;
+                        //this->white_moves++;
                     }
 
                     // white right rook
@@ -619,7 +630,7 @@ public:
                     {
                         this->is_white_right_rook_moved = true;
 
-                        this->white_moves++;
+                        //this->white_moves++;
                     }
                 }
                 // for black rook
@@ -631,7 +642,7 @@ public:
                     {
                         this->is_black_left_rook_moved = true;
 
-                        this->black_moves++;
+                        //this->black_moves++;
                     }
 
                     // black right rook
@@ -639,7 +650,7 @@ public:
                     {
                         this->is_black_right_rook_moved = true;
 
-                        this->black_moves++;
+                        //this->black_moves++;
                     }
                 }
             }
