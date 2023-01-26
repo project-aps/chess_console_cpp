@@ -110,7 +110,7 @@ class Board{
         //printing upper index starting from 1 to 8
         cout<<"   ";
         for(int i=1;i<=8;i++){
-          cout<<"   "<<i<<"  ";  
+          cout<<"   "<<char(i+96)<<"  ";  
         }
         cout<<endl;
 
@@ -139,7 +139,7 @@ class Board{
          //printing lower index starting from 1 to 8
          cout<<"    ";
         for(int i=1;i<=8;i++){
-          cout<<"   "<<i<<"  ";  
+          cout<<"   "<<char(i+96)<<"  ";  
         }
 
         cout<<endl;
