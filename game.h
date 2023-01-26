@@ -47,9 +47,12 @@ class Game
     bool is_black_left_rook_moved;
     bool is_black_right_rook_moved;
 
-    //to store the no.of moves of white and black
+    // to store the no.of moves of white and black
     int white_moves;
     int black_moves;
+
+    // to store the move of that turn while double movement of pawn
+    int get_move_while_double_movement_of_pawn;
 
 public:
     // Castling class is friend class of Game Class i.e. Castling Class can acces the methods and data members of Game class from Castling Class;
@@ -78,8 +81,10 @@ public:
         this->is_black_left_rook_moved = false;
         this->is_black_right_rook_moved = false;
 
-        this->white_moves=0;
-        this->black_moves=0;
+        this->white_moves = 0;
+        this->black_moves = 0;
+
+        this->get_move_while_double_movement_of_pawn = 0;
     }
 
     Game(Board &c)
@@ -103,8 +108,10 @@ public:
         this->is_black_left_rook_moved = false;
         this->is_black_right_rook_moved = false;
 
-        this->white_moves=0;
-        this->black_moves=0;
+        this->white_moves = 0;
+        this->black_moves = 0;
+
+        this->get_move_while_double_movement_of_pawn = 0;
     }
 
     Game(Color tn)
@@ -127,8 +134,10 @@ public:
         this->is_black_left_rook_moved = false;
         this->is_black_right_rook_moved = false;
 
-        this->white_moves=0;
-        this->black_moves=0;
+        this->white_moves = 0;
+        this->black_moves = 0;
+
+        this->get_move_while_double_movement_of_pawn = 0;
     }
 
     /////////////////////////////////////////////////////////////////////////////////////
@@ -138,8 +147,8 @@ public:
     bool play_game()
     {
         system("cls"); // each time it types this string cls to terminal and thus it prints board every time
-        
-        //this->print_game_staus(game_staus);
+
+        // this->print_game_staus(game_staus);
         this->print_moves();
         white.print_dead_board();
         b.print_board();
@@ -514,7 +523,7 @@ public:
     {
 
         Piece_type src_piece = src->get_piece();
-        Color piece_color=src->get_color();
+        Color piece_color = src->get_color();
 
         King k1;
         Knight n1;
@@ -532,17 +541,19 @@ public:
             // King k1;
             if (k1.valid_move(start_x, start_y, end_x, end_y, b))
             {
-                //Color piece_color=src->get_color();
+                // Color piece_color=src->get_color();
                 move(src, dest);
 
-                //changing the value of king_moved of respective color
-                if(piece_color==WHITE){
-                    this->is_white_king_moved=true;
-                    //whites_moves increased
+                // changing the value of king_moved of respective color
+                if (piece_color == WHITE)
+                {
+                    this->is_white_king_moved = true;
+                    // whites_moves increased
                     this->white_moves++;
                 }
-                else if(piece_color==BLACK){
-                    this->is_black_king_moved=true;
+                else if (piece_color == BLACK)
+                {
+                    this->is_black_king_moved = true;
                     this->black_moves++;
                 }
             }
@@ -559,15 +570,17 @@ public:
 
             if (n1.valid_move(start_x, start_y, end_x, end_y, b))
             {
-                //Color piece_color=src->get_color();
+                // Color piece_color=src->get_color();
                 move(src, dest);
 
-                if(piece_color==WHITE){
-                    //whites_moves increased
+                if (piece_color == WHITE)
+                {
+                    // whites_moves increased
                     this->white_moves++;
                 }
-                else if(piece_color==BLACK){
-                    //black_moves increased
+                else if (piece_color == BLACK)
+                {
+                    // black_moves increased
                     this->black_moves++;
                 }
             }
@@ -593,37 +606,41 @@ public:
                 if (piece_color == WHITE)
                 {
 
-                  //white left rook
-                  if((start_y == starting_cell_y) && (start_x == starting_cell_x) ){
-                    this->is_white_left_rook_moved=true;
+                    // white left rook
+                    if ((start_y == starting_cell_y) && (start_x == starting_cell_x))
+                    {
+                        this->is_white_left_rook_moved = true;
 
-                    this->white_moves++;
-                  }
+                        this->white_moves++;
+                    }
 
-                  //white right rook 
-                  if((start_y == starting_cell_y)  && (start_x == ending_cell_x) ){
-                    this->is_white_right_rook_moved=true;
+                    // white right rook
+                    if ((start_y == starting_cell_y) && (start_x == ending_cell_x))
+                    {
+                        this->is_white_right_rook_moved = true;
 
-                    this->white_moves++;
-                  } 
+                        this->white_moves++;
+                    }
                 }
                 // for black rook
                 if (piece_color == BLACK)
                 {
 
-                  //black left rook
-                  if((start_y == ending_cell_y)  && (start_x == starting_cell_x) ){
-                    this->is_black_left_rook_moved=true;
+                    // black left rook
+                    if ((start_y == ending_cell_y) && (start_x == starting_cell_x))
+                    {
+                        this->is_black_left_rook_moved = true;
 
-                    this->black_moves++;
-                  }
+                        this->black_moves++;
+                    }
 
-                  //black right rook 
-                  if((start_y == ending_cell_y)  && (start_x == ending_cell_x) ){
-                    this->is_black_right_rook_moved=true;
+                    // black right rook
+                    if ((start_y == ending_cell_y) && (start_x == ending_cell_x))
+                    {
+                        this->is_black_right_rook_moved = true;
 
-                    this->black_moves++;
-                  }
+                        this->black_moves++;
+                    }
                 }
             }
             else
@@ -640,12 +657,14 @@ public:
             {
                 move(src, dest);
 
-                if(piece_color==WHITE){
-                    //whites_moves increased
+                if (piece_color == WHITE)
+                {
+                    // whites_moves increased
                     this->white_moves++;
                 }
-                else if(piece_color==BLACK){
-                    //black_moves increased
+                else if (piece_color == BLACK)
+                {
+                    // black_moves increased
                     this->black_moves++;
                 }
             }
@@ -663,12 +682,14 @@ public:
             {
                 move(src, dest);
 
-                if(piece_color==WHITE){
-                    //whites_moves increased
+                if (piece_color == WHITE)
+                {
+                    // whites_moves increased
                     this->white_moves++;
                 }
-                else if(piece_color==BLACK){
-                    //black_moves increased
+                else if (piece_color == BLACK)
+                {
+                    // black_moves increased
                     this->black_moves++;
                 }
             }
@@ -686,18 +707,31 @@ public:
             {
                 move(src, dest);
 
-                if(p1.get_this_pawn_moved_double()){
-                    src->set_pawn_double_step_movement(true);
-                }
-                if(piece_color==WHITE){
-                    //whites_moves increased
+                if (piece_color == WHITE)
+                {
+                    // whites_moves increased
                     this->white_moves++;
                 }
-                else if(piece_color==BLACK){
-                    //black_moves increased
+                else if (piece_color == BLACK)
+                {
+                    // black_moves increased
                     this->black_moves++;
                 }
-                
+
+                if (p1.get_this_pawn_moved_double())
+                {
+                    dest->set_pawn_double_step_movement(true);
+
+                    if (piece_color == WHITE)
+                    {
+                        this->get_move_while_double_movement_of_pawn = white_moves;
+                    }
+
+                    if (piece_color == BLACK)
+                    {
+                        this->get_move_while_double_movement_of_pawn = black_moves;
+                    }
+                }
             }
             else
             {
@@ -1375,7 +1409,7 @@ public:
                     Cell *rook_dest = board.get_cell_pointer(start_x - 1, start_y);
 
                     move(rook_src, rook_dest);
-                    
+
                     this->white_moves++;
                     // after castling (moving the king and rook to specified location) is done return true
                     return true;
@@ -1581,42 +1615,47 @@ public:
         cout << endl;
     }
 
-
     //////////////////////////////////////////////////////////////////////////////////////////
-    //check en-passant
-    bool check_en_passant(int start_x, int start_y, int final_x, int final_y, Board &board){
+    // check en-passant
+    bool check_move_en_passant(int start_x, int start_y, int final_x, int final_y, Board &board)
+    {
 
-        Piece p;
-        int x = (p.diff_x(start_x, final_x));
-        int y = (p.diff_y(start_y, final_y));
-        
-        Cell* src=board.get_cell_pointer(start_x,start_y);
-        Cell* dest=board.get_cell_pointer(final_x,final_y);
+        Cell *src = board.get_cell_pointer(start_x, start_y);
+        Color src_color = src->get_color();
 
-        return true;
+        // for white src piece
+        if ((src_color == WHITE) && (this->white_moves == this->get_move_while_double_movement_of_pawn))
+        {
+            return true;
+        }
 
+        if ((src_color == BLACK) && (this->black_moves == (this->get_move_while_double_movement_of_pawn - 1)))
+        {
+            return true;
+        }
+        // if nothing matched user has played some other moves so enpassing not possible
+        return false;
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////
-    //print moves in upper portion of the board
+    // print moves in upper portion of the board
 
-    void print_moves(){
+    void print_moves()
+    {
         system("cls");
-        cout<<"-------------------\n";
-        cout<<"WHITE moves: "<<this->white_moves<<endl;
-        cout<<"BLACK moves: "<<this->black_moves<<endl;
-        cout<<"-------------------\n";
+        cout << "-------------------\n";
+        cout << "WHITE moves: " << this->white_moves << endl;
+        cout << "BLACK moves: " << this->black_moves << endl;
+        cout << "-------------------\n";
     }
-    
+
     //////////////////////////////////////////////////////
     // en passant function
     bool en_passing(int start_x, int start_y, int final_x, int final_y, Board &board)
     {
 
-        // if en_passant possible then
-        if (check_en_passant(start_x,start_y,final_x,final_y,b))
+        if (this->check_move_en_passant(start_x, start_y, final_x, final_y, board))
         {
-
             Piece p;
             int x = (p.diff_x(start_x, final_x));
             int y = (p.diff_y(start_y, final_y));
@@ -1634,13 +1673,13 @@ public:
                     Color src_color = src->get_color();
                     Cell *src_one_step_right = board.get_cell_pointer(start_x + 1, start_y);
 
-                    
-                    
-                    if ((dest->get_piece() == EMPTY) && (src_one_step_right->get_piece() == PAWN) && (src_one_step_right->get_color() == BLACK))
+                    if ((dest->get_piece() == EMPTY) && (src_one_step_right->get_piece() == PAWN) && (src_one_step_right->get_color() == BLACK) && (src_one_step_right->get_pawn_double_step_movement() == true))
                     {
 
                         this->move(src, src_one_step_right);
                         this->move(src_one_step_right, dest);
+
+                        this->white_moves++;
                         return true;
                     }
                 }
@@ -1651,11 +1690,13 @@ public:
                     Color src_color = src->get_color();
                     Cell *src_one_step_left = board.get_cell_pointer(start_x - 1, start_y);
 
-                    if ((dest->get_piece() == EMPTY) && (src_one_step_left->get_piece() == PAWN) && (src_one_step_left->get_color() == BLACK))
+                    if ((dest->get_piece() == EMPTY) && (src_one_step_left->get_piece() == PAWN) && (src_one_step_left->get_color() == BLACK) && (src_one_step_left->get_pawn_double_step_movement() == true))
                     {
 
                         this->move(src, src_one_step_left);
                         this->move(src_one_step_left, dest);
+
+                        this->white_moves++;
                         return true;
                     }
                 }
@@ -1671,11 +1712,13 @@ public:
                     Color src_color = src->get_color();
                     Cell *src_one_step_right = board.get_cell_pointer(start_x + 1, start_y);
 
-                    if ((dest->get_piece() == EMPTY) && (src_one_step_right->get_piece() == PAWN) && (src_one_step_right->get_color() == WHITE))
+                    if ((dest->get_piece() == EMPTY) && (src_one_step_right->get_piece() == PAWN) && (src_one_step_right->get_color() == WHITE) && (src_one_step_right->get_pawn_double_step_movement() == true))
                     {
 
                         this->move(src, src_one_step_right);
                         this->move(src_one_step_right, dest);
+
+                        this->black_moves++;
                         return true;
                     }
                 }
@@ -1686,17 +1729,21 @@ public:
                     Color src_color = src->get_color();
                     Cell *src_one_step_left = board.get_cell_pointer(start_x - 1, start_y);
 
-                    if ((dest->get_piece() == EMPTY) && (src_one_step_left->get_piece() == PAWN) && (src_one_step_left->get_color() == WHITE))
+                    if ((dest->get_piece() == EMPTY) && (src_one_step_left->get_piece() == PAWN) && (src_one_step_left->get_color() == WHITE) && (src_one_step_left->get_pawn_double_step_movement() == true))
                     {
 
                         this->move(src, src_one_step_left);
                         this->move(src_one_step_left, dest);
+
+                        this->black_moves++;
                         return true;
                     }
                 }
             }
+
+            // if enpassant is not possible then return false
+            return false;
         }
-        // if enpassant is not possible then return false
         else
         {
             return false;
