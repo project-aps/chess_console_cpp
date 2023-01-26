@@ -6,11 +6,13 @@
 
 class Pawn : public Piece
 {
-
+    bool this_pawn_moved_double;
 public:
     /////////////////////////////////////////////////////////////////////////////////////////
     // constructor
-    Pawn(){};
+    Pawn(){
+        this->this_pawn_moved_double=false;
+    };
 
     //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -50,7 +52,7 @@ public:
         if (pawn_color == WHITE)
         {
 
-            // pawn at initial level
+            // pawn at initial level or double movement possible
             if ((pawn_location_y == white_pawn_start_y) && ((y == 2) && (x == 0)))
             {
 
@@ -62,6 +64,7 @@ public:
 
                 if ((piece_two_step_front_of_white_pawn == EMPTY) && (piece_one_step_front_of_white_pawn == EMPTY))
                 {
+                    this->this_pawn_moved_double=true;
                     return true;
                 }
                 else
@@ -141,7 +144,7 @@ public:
         else if (pawn_color == BLACK)
         {
 
-            // pawn at initial level
+            // pawn at initial level or double movement possible
             if ((pawn_location_y == black_pawn_start_y) && (y == -2 && x == 0))
             {
                 // pawn ko agadi kunai piece hunu bhayena then only it can move forward
@@ -152,6 +155,7 @@ public:
 
                 if ((piece_two_step_front_of_black_pawn == EMPTY) && (piece_one_step_front_of_black_pawn == EMPTY))
                 {
+                    this->this_pawn_moved_double=true;
                     return true;
                 }
                 else
@@ -230,6 +234,9 @@ public:
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
     // add promotion feature
+    bool get_this_pawn_moved_double(){
+        return this->this_pawn_moved_double;
+    }
 };
 
 #endif

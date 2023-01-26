@@ -41,6 +41,12 @@ int main()
    
     // for promotion
     // 1214 2725 1425 1715 1113 1514 1323 1413 8283 1312 8384
+
+    //for white enpassing
+    // 2224 8786 2425 3735
+
+    //for black enpassing
+    // 8283 3735 8384 3534 2224
           
     
 /*

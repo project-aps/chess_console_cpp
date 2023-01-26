@@ -12,6 +12,7 @@ class Cell{
     Color piece_color;
     int x;
     int y;
+    bool pawn_latest_double_step_movement;
     
     
     public:
@@ -20,7 +21,7 @@ class Cell{
     
     //default constructor
      Cell (){
-        
+        this->pawn_latest_double_step_movement=false;
      }
 
     //constructor    
@@ -30,6 +31,7 @@ class Cell{
         this->set_pos_x(x);
         this->set_pos_y(y);
         this->set_color(piece_color);
+        this->pawn_latest_double_step_movement=false;
         
     }
 
@@ -39,6 +41,7 @@ class Cell{
         this->set_pos_x(0);
         this->set_pos_y(0);
         this->set_color(piece_color);
+        this->pawn_latest_double_step_movement=false;
         
     }
 
@@ -104,8 +107,15 @@ class Cell{
     }
 
 ////////////////////////////////////////////////////////////////  
-    
+    //setter and getter of pawn_doubel_step_movement
 
+    void set_pawn_double_step_movement(bool option){
+        this->pawn_latest_double_step_movement=option;
+    }
+
+    bool get_pawn_double_step_movement(){
+        return this->pawn_latest_double_step_movement;
+    }
 
 ////////////////////////////////////////////////////////////////    
 
