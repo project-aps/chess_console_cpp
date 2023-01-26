@@ -270,7 +270,7 @@ public:
             /// ////////////////
 
             cout << "Enter move as a single four integer value.\n";
-            cout << "Enter x-coordinates first and then y-cordinates\n";
+            cout << "Enter x-coordinates (as small alphabets) first and then y-cordinates\n";
             cin >> move;
 
             if (move.length() != 4)
@@ -279,10 +279,10 @@ public:
                 continue;
             }
 
-            start_x = move[0] - 48; // -48 means changing ASCII value to integer value
-            start_y = move[1] - 48;
-            end_x = move[2] - 48;
-            end_y = move[3] - 48;
+            start_x = move[0] - 96; // -96 means changing character ASCII value to integer value from a=1 and respectively
+            start_y = move[1] - 48; // -48 means changing ASCII value to integer value
+            end_x = move[2] - 96; // -96 means changing character ASCII value to integer value
+            end_y = move[3] - 48; // -48 means changing ASCII value to integer value
 
             // if input value is out of range then it makes the user to re-input by continuing the loop from start
             if (start_x < 1 || start_y < 1 || start_x > 8 || start_y > 8 || end_x < 1 || end_y < 1 || end_x > 8 || end_y > 8)
