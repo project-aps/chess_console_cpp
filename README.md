@@ -4,7 +4,8 @@ It is a completely local two players fully fledged playable chess game.
 
 It is a console version game i.e. can be played in console implemented using c++.
 
-  
+## Run
+To run the game, execute the main.exe file.
 
 
 ## Installation
