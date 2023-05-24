@@ -281,8 +281,8 @@ public:
 
             start_x = move[0] - 96; // -96 means changing character ASCII value to integer value from a=1 and respectively
             start_y = move[1] - 48; // -48 means changing ASCII value to integer value
-            end_x = move[2] - 96; // -96 means changing character ASCII value to integer value
-            end_y = move[3] - 48; // -48 means changing ASCII value to integer value
+            end_x = move[2] - 96;   // -96 means changing character ASCII value to integer value
+            end_y = move[3] - 48;   // -48 means changing ASCII value to integer value
 
             // if input value is out of range then it makes the user to re-input by continuing the loop from start
             if (start_x < 1 || start_y < 1 || start_x > 8 || start_y > 8 || end_x < 1 || end_y < 1 || end_x > 8 || end_y > 8)
@@ -599,7 +599,7 @@ public:
             {
                 Color piece_color = src->get_color();
                 move(src, dest);
-                
+
                 if (piece_color == WHITE)
                 {
                     // whites_moves increased
@@ -622,7 +622,7 @@ public:
                     {
                         this->is_white_left_rook_moved = true;
 
-                        //this->white_moves++;
+                        // this->white_moves++;
                     }
 
                     // white right rook
@@ -630,7 +630,7 @@ public:
                     {
                         this->is_white_right_rook_moved = true;
 
-                        //this->white_moves++;
+                        // this->white_moves++;
                     }
                 }
                 // for black rook
@@ -642,7 +642,7 @@ public:
                     {
                         this->is_black_left_rook_moved = true;
 
-                        //this->black_moves++;
+                        // this->black_moves++;
                     }
 
                     // black right rook
@@ -650,7 +650,7 @@ public:
                     {
                         this->is_black_right_rook_moved = true;
 
-                        //this->black_moves++;
+                        // this->black_moves++;
                     }
                 }
             }
@@ -1571,12 +1571,17 @@ public:
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
+    char numericToAlphabet(int num)
+    {
+        return (num + 96);
+    }
+
     /////////////////////////////////////////////////////////////////////////////////////////
     // it prints the piece location which gives the king check
     void print_check_by_piece_details()
     {
         cout << "CHECK BY:\n";
-        cout << "PIECE_AT: " << this->check_by_piece_x << this->check_by_piece_y << endl;
+        cout << "PIECE_AT: " << numericToAlphabet(this->check_by_piece_x) << this->check_by_piece_y << endl;
         cout << endl;
     }
     /////////////////////////////////////////////////////////////////////////////////////////
