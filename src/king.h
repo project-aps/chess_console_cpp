@@ -1,32 +1,41 @@
-#ifndef QUEEN_H
-#define QUEEN_H
+#ifndef KING_H
+#define KING_H
 
-#include "bishop.h"
-#include "rook.h"
+
+//#include "piece.h"
+
 #include "board.h"
-#include <iostream>
 
-class Queen : public Piece
+//#include "game.h"
+
+#include<iostream>
+class King : public Piece
 {
+
+    
+
+ 
     public:
-//////////////////////////////////////////////////////////////////////////////////////////
-    //constructor
-    Queen(){
+
+///////////////////////////////////////////////////////////////////////////////////////////
+    // constructor
+    King(){
 
     }
 
-
 //////////////////////////////////////////////////////////////////////////////////////////
-    // check is the move valid for this piece Queen 
+    //check is the move valid for this piece King
 
     bool valid_move(int start_x, int start_y, int final_x, int final_y,Board board)
     {
-        
+        int x = abs(diff_x(start_x, final_x));
+        int y = abs(diff_y(start_y, final_y));
+
         if (start_x == final_x && start_y == final_y)
         {
             return false;
         }
-
+        
         Cell* src=board.get_cell_pointer(start_x,start_y);
         Cell* dest=board.get_cell_pointer(final_x,final_y);
         
@@ -37,16 +46,16 @@ class Queen : public Piece
         }
 
 
-        Bishop bishop;
-        Rook rook;
-
-        //returns if either bishop or rook can move at that position
-        return (bishop.valid_move(start_x,start_y,final_x,final_y,board) || rook.valid_move(start_x,start_y,final_x,final_y,board));
-
+        if ((x <= 1) && (y <= 1))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 /////////////////////////////////////////////////////////////////////////////////////////////////
-
-    
 };
 
 #endif

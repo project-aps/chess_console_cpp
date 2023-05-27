@@ -1,41 +1,36 @@
-#ifndef KING_H
-#define KING_H
-
+#ifndef KNIGHT_ABC
+#define KNIGHT_ABC
 
 //#include "piece.h"
-
 #include "board.h"
+#include <iostream>
 
-//#include "game.h"
-
-#include<iostream>
-class King : public Piece
+class Knight : public Piece
 {
 
-    
-
- 
-    public:
-
-///////////////////////////////////////////////////////////////////////////////////////////
-    // constructor
-    King(){
-
-    }
+public:
 
 //////////////////////////////////////////////////////////////////////////////////////////
-    //check is the move valid for this piece King
+    //constructor
+    Knight(){};
+
+//////////////////////////////////////////////////////////////////////////////////////////
+    // check is the move valid for this piece Knight
 
     bool valid_move(int start_x, int start_y, int final_x, int final_y,Board board)
     {
+
+
         int x = abs(diff_x(start_x, final_x));
         int y = abs(diff_y(start_y, final_y));
+
+        
 
         if (start_x == final_x && start_y == final_y)
         {
             return false;
         }
-        
+
         Cell* src=board.get_cell_pointer(start_x,start_y);
         Cell* dest=board.get_cell_pointer(final_x,final_y);
         
@@ -46,16 +41,16 @@ class King : public Piece
         }
 
 
-        if ((x <= 1) && (y <= 1))
+        if (x * y == 2)
         {
             return true;
         }
         else
         {
+            
             return false;
         }
     }
 /////////////////////////////////////////////////////////////////////////////////////////////////
 };
-
 #endif

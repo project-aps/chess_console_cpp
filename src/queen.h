@@ -1,31 +1,27 @@
-#ifndef KNIGHT_ABC
-#define KNIGHT_ABC
+#ifndef QUEEN_H
+#define QUEEN_H
 
-//#include "piece.h"
+#include "bishop.h"
+#include "rook.h"
 #include "board.h"
 #include <iostream>
 
-class Knight : public Piece
+class Queen : public Piece
 {
-
-public:
-
+    public:
 //////////////////////////////////////////////////////////////////////////////////////////
     //constructor
-    Knight(){};
+    Queen(){
+
+    }
+
 
 //////////////////////////////////////////////////////////////////////////////////////////
-    // check is the move valid for this piece Knight
+    // check is the move valid for this piece Queen 
 
     bool valid_move(int start_x, int start_y, int final_x, int final_y,Board board)
     {
-
-
-        int x = abs(diff_x(start_x, final_x));
-        int y = abs(diff_y(start_y, final_y));
-
         
-
         if (start_x == final_x && start_y == final_y)
         {
             return false;
@@ -41,16 +37,16 @@ public:
         }
 
 
-        if (x * y == 2)
-        {
-            return true;
-        }
-        else
-        {
-            
-            return false;
-        }
+        Bishop bishop;
+        Rook rook;
+
+        //returns if either bishop or rook can move at that position
+        return (bishop.valid_move(start_x,start_y,final_x,final_y,board) || rook.valid_move(start_x,start_y,final_x,final_y,board));
+
     }
 /////////////////////////////////////////////////////////////////////////////////////////////////
+
+    
 };
+
 #endif
